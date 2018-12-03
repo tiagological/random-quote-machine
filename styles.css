@@ -1,0 +1,96 @@
+html {
+  color: white;
+}
+
+body,
+button {
+  font-family: "Playfair Display", serif, sans-serif;
+}
+
+#quote-box {
+  width: 50%;
+  margin: 10% auto auto auto;
+  padding: 1em;
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+}
+
+#text {
+  font-size: 1rem;
+}
+
+@media (min-width: 992px) {
+  #text {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 992px) {
+  #text {
+    font-size: 2rem;
+  }
+}
+
+#author {
+  font-size: 0.8rem;
+}
+
+@media (min-width: 992px) {
+  #author {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  #author {
+    font-size: 1.5rem;
+  }
+}
+
+#buttons {
+  overflow: auto;
+}
+
+button {
+  font-size: 1.2rem;
+  padding: 10px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+#new-quote {
+  display: inline;
+  float: left;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+}
+
+#tweet-quote-button {
+  display: inline;
+  float: right;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  width: 50px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+#twitter-icon {
+  transform: scale(1.5);
+}
+
+#footer {
+  text-align: center;
+  margin-top: 40px;
+  font-family: sans-serif;
+  color: #fff;
+}
