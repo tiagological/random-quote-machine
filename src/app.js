@@ -12,18 +12,6 @@ class App extends React.Component {
     this.changeQuote();
   }
 
-  // componentWillUpdate() {
-  //   document
-  //     .querySelector('html')
-  //     .animate([{ opacity: 1 }, { opacity: 0.1 }], 100);
-  // }
-
-  // componentDidUpdate() {
-  //   document
-  //     .querySelector('html')
-  //     .animate([{ opacity: 0.1 }, { opacity: 1 }], 500);
-  // }
-
   changeQuote() {
     const COLORS = [
       '#16a085',
