@@ -12,6 +12,18 @@ class App extends React.Component {
     this.changeQuote();
   }
 
+  // componentWillUpdate() {
+  //   document
+  //     .querySelector('html')
+  //     .animate([{ opacity: 1 }, { opacity: 0.1 }], 100);
+  // }
+
+  // componentDidUpdate() {
+  //   document
+  //     .querySelector('html')
+  //     .animate([{ opacity: 0.1 }, { opacity: 1 }], 500);
+  // }
+
   changeQuote() {
     const COLORS = [
       '#16a085',
@@ -35,30 +47,47 @@ class App extends React.Component {
 
     const color = Math.floor(Math.random() * COLORS.length + 1);
 
+    setTimeout(() => {
+      fetch(
+        'https://andruxnet-random-famous-quotes.p.rapidapi.com/?cat=famous&count=1',
+        {
+          headers: {
+            'X-RapidAPI-Key':
+              'd1d3dedbf5mshe1ec2d4379d51dbp168869jsn8c889a73a933'
+          }
+        }
+      )
+        .then(results => results.json())
+        .then(data =>
+          this.setState({
+            quote: data[0].quote,
+            author: data[0].author
+          })
+        );
+    }, 500);
+
     document.body.style.backgroundColor = COLORS[color];
 
     document.querySelector('html').style.color = COLORS[color];
+
+    document
+      .getElementById('text')
+      .animate(
+        [{ opacity: 1 }, { opacity: 0 }, { opacity: 0 }, { opacity: 1 }],
+        2000
+      );
+
+    document
+      .getElementById('author')
+      .animate(
+        [{ opacity: 1 }, { opacity: 0.01 }, { opacity: 0.01 }, { opacity: 1 }],
+        2000
+      );
 
     document.getElementById('new-quote').style.backgroundColor = COLORS[color];
 
     document.getElementById('tweet-quote-button').style.backgroundColor =
       COLORS[color];
-
-    fetch(
-      'https://andruxnet-random-famous-quotes.p.rapidapi.com/?cat=famous&count=1',
-      {
-        headers: {
-          'X-RapidAPI-Key': 'd1d3dedbf5mshe1ec2d4379d51dbp168869jsn8c889a73a933'
-        }
-      }
-    )
-      .then(results => results.json())
-      .then(data =>
-        this.setState({
-          quote: data[0].quote,
-          author: data[0].author
-        })
-      );
   }
 
   render() {

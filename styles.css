@@ -1,10 +1,27 @@
+@keyframes fade {
+  from {
+    opacity: 0.01;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 html {
-  color: white;
+  color: #ffffff;
+  animation-name: fade;
+  animation-duration: 4s;
+  transition-property: color;
+  transition-duration: 4s;
 }
 
 body,
 button {
-  font-family: "Playfair Display", serif, sans-serif;
+  font-family: 'Playfair Display', serif, sans-serif;
+  animation-name: fade;
+  animation-duration: 4s;
+  transition-property: background-color;
+  transition-duration: 4s;
 }
 
 #quote-box {
@@ -13,7 +30,7 @@ button {
   padding: 1em;
   border: none;
   border-radius: 5px;
-  background-color: white;
+  background-color: #ffffff;
 }
 
 #text {
@@ -77,6 +94,13 @@ button:hover {
   border: none;
   border-radius: 5px;
   width: 50px;
+}
+
+@media (max-width: 768px) {
+  #new-quote,
+  #tweet-quote-button {
+    transform: scale(0.9);
+  }
 }
 
 a {
