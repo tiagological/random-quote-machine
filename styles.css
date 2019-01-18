@@ -1,3 +1,12 @@
+@-webkit-keyframes fade {
+  from {
+    opacity: 0.01;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes fade {
   from {
     opacity: 0.01;
@@ -9,18 +18,26 @@
 
 html {
   color: #ffffff;
+  -webkit-animation-name: fade;
   animation-name: fade;
+  -webkit-animation-duration: 4s;
   animation-duration: 4s;
+  -webkit-transition-property: color;
   transition-property: color;
+  -webkit-transition-duration: 4s;
   transition-duration: 4s;
 }
 
 body,
 button {
   font-family: 'Playfair Display', serif, sans-serif;
+  -webkit-animation-name: fade;
   animation-name: fade;
+  -webkit-animation-duration: 4s;
   animation-duration: 4s;
+  -webkit-transition-property: background-color;
   transition-property: background-color;
+  -webkit-transition-duration: 4s;
   transition-duration: 4s;
 }
 
@@ -99,6 +116,7 @@ button:hover {
 @media (max-width: 768px) {
   #new-quote,
   #tweet-quote-button {
+    -webkit-transform: scale(0.9);
     transform: scale(0.9);
   }
 }
@@ -109,6 +127,7 @@ a {
 }
 
 #twitter-icon {
+  -webkit-transform: scale(1.5);
   transform: scale(1.5);
 }
 
