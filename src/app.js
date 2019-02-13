@@ -1,18 +1,14 @@
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      quote: '',
-      author: ''
-    };
-    this.changeQuote = this.changeQuote.bind(this);
-  }
+  state = {
+    quote: '',
+    author: ''
+  };
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.changeQuote();
-  }
+  };
 
-  changeQuote() {
+  changeQuote = () => {
     const COLORS = [
       '#16a085',
       '#27ae60',
@@ -76,7 +72,7 @@ class App extends React.Component {
 
     document.getElementById('tweet-quote-button').style.backgroundColor =
       COLORS[color];
-  }
+  };
 
   render() {
     return (
