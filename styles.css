@@ -1,49 +1,33 @@
-@-webkit-keyframes fade {
-  from {
-    opacity: 0.01;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fade {
-  from {
-    opacity: 0.01;
-  }
-  to {
-    opacity: 1;
-  }
+html,
+body {
+  height: 100%;
+  margin: 0;
 }
 
 html {
   color: #ffffff;
-  -webkit-animation-name: fade;
-  animation-name: fade;
-  -webkit-animation-duration: 4s;
-  animation-duration: 4s;
-  -webkit-transition-property: color;
-  transition-property: color;
-  -webkit-transition-duration: 4s;
-  transition-duration: 4s;
 }
 
 body,
 button {
   font-family: 'Playfair Display', serif, sans-serif;
-  -webkit-animation-name: fade;
-  animation-name: fade;
-  -webkit-animation-duration: 4s;
-  animation-duration: 4s;
-  -webkit-transition-property: background-color;
-  transition-property: background-color;
-  -webkit-transition-duration: 4s;
+}
+
+#root {
+  height: 100%;
+}
+
+.app-container {
+  height: 100%;
+  background-color: black;
   transition-duration: 4s;
 }
 
 #quote-box {
   width: 50%;
-  margin: 10% auto auto auto;
+  margin: 0 auto;
+  position: relative;
+  top: 5rem;
   padding: 1em;
   border: none;
   border-radius: 5px;
@@ -82,13 +66,14 @@ button {
   }
 }
 
-#buttons {
+#buttons-container {
   overflow: auto;
 }
 
 button {
   font-size: 1.2rem;
   padding: 10px;
+  transition: 2s;
 }
 
 button:hover {
@@ -133,7 +118,8 @@ a {
 
 #footer {
   text-align: center;
-  margin-top: 40px;
+  position: relative;
+  top: 10rem;
   font-family: sans-serif;
   color: #fff;
 }

@@ -1,7 +1,8 @@
 class App extends React.Component {
   state = {
     quote: '',
-    author: ''
+    author: '',
+    randomColor: ''
   };
 
   componentDidMount = () => {
@@ -29,7 +30,11 @@ class App extends React.Component {
       '#aaffc3'
     ];
 
-    const color = Math.floor(Math.random() * COLORS.length + 1);
+    const randomColor = Math.floor(Math.random() * COLORS.length + 1);
+
+    this.setState({
+      randomColor: COLORS[randomColor]
+    });
 
     setTimeout(() => {
       fetch(
@@ -50,9 +55,7 @@ class App extends React.Component {
         );
     }, 500);
 
-    document.body.style.backgroundColor = COLORS[color];
-
-    document.querySelector('html').style.color = COLORS[color];
+    document.querySelector('html').style.color = COLORS[randomColor];
 
     document
       .getElementById('text')
@@ -67,26 +70,28 @@ class App extends React.Component {
         [{ opacity: 1 }, { opacity: 0.01 }, { opacity: 0.01 }, { opacity: 1 }],
         2000
       );
-
-    document.getElementById('new-quote').style.backgroundColor = COLORS[color];
-
-    document.getElementById('tweet-quote-button').style.backgroundColor =
-      COLORS[color];
   };
 
   render() {
     return (
-      <div>
+      <div
+        class='app-container'
+        style={{ backgroundColor: this.state.randomColor }}>
         <div id='quote-box'>
           <h3 id='text'>
             <i class='fa fa-quote-left' /> {this.state.quote}
           </h3>
           <p id='author'>- {this.state.author}</p>
-          <div id='buttons'>
-            <button id='new-quote' onClick={this.changeQuote}>
+          <div id='buttons-container'>
+            <button
+              id='new-quote'
+              onClick={this.changeQuote}
+              style={{ backgroundColor: this.state.randomColor }}>
               New Quote
             </button>
-            <button id='tweet-quote-button'>
+            <button
+              id='tweet-quote-button'
+              style={{ backgroundColor: this.state.randomColor }}>
               <a
                 id='tweet-quote'
                 href={
