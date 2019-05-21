@@ -77,7 +77,7 @@ class App extends React.Component {
       <div
         class='app-container'
         style={{ backgroundColor: this.state.randomColor }}>
-        <div id='quote-box'>
+        <div id='quote-box' className='animated fadeInDown'>
           <h3 id='text'>
             <i class='fa fa-quote-left' /> {this.state.quote}
           </h3>
