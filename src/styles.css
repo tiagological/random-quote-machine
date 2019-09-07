@@ -17,23 +17,6 @@ button {
   height: 100%;
 }
 
-.app-container {
-  height: 100%;
-  background-color: black;
-  transition-duration: 4s;
-}
-
-#quote-box {
-  width: 50%;
-  margin: 0 auto;
-  position: relative;
-  top: 5rem;
-  padding: 1em;
-  border: none;
-  border-radius: 5px;
-  background-color: #ffffff;
-}
-
 #text {
   font-size: 1rem;
 }
@@ -73,7 +56,9 @@ button {
 button {
   font-size: 1.2rem;
   padding: 10px;
-  transition: 2s;
+  -webkit-transition: 2s;
+  -webkit-transition: 500ms;
+  transition: 500ms;
 }
 
 button:hover {

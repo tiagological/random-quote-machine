@@ -1,15 +1,45 @@
+import React, { Fragment } from 'react';
+import './styles.css';
+import styled from 'styled-components/macro';
+import 'animate.css';
+import { PulseLoader } from 'react-spinners';
+
 class App extends React.Component {
   state = {
     quote: '',
     author: '',
-    randomColor: ''
+    randomColor: '#16a085',
+    isLoading: true
   };
 
-  componentDidMount = () => {
-    this.changeQuote();
+  componentDidMount = async () => {
+    await this.changeQuote();
+    this.selectColor();
   };
 
   changeQuote = () => {
+    this.setState({
+      isLoading: true
+    });
+    fetch(
+      'https://andruxnet-random-famous-quotes.p.rapidapi.com/?cat=famous&count=1',
+      {
+        headers: {
+          'X-RapidAPI-Key': 'd1d3dedbf5mshe1ec2d4379d51dbp168869jsn8c889a73a933'
+        }
+      }
+    )
+      .then(results => results.json())
+      .then(data =>
+        this.setState({
+          quote: data[0].quote,
+          author: data[0].author,
+          isLoading: false
+        })
+      );
+  };
+
+  selectColor = () => {
     const COLORS = [
       '#16a085',
       '#27ae60',
@@ -30,88 +60,130 @@ class App extends React.Component {
       '#aaffc3'
     ];
 
-    const randomColor = Math.floor(Math.random() * COLORS.length + 1);
+    const randomIndex = Math.floor(Math.random() * COLORS.length);
 
     this.setState({
-      randomColor: COLORS[randomColor]
+      randomColor: COLORS[randomIndex]
     });
+  };
 
-    setTimeout(() => {
-      fetch(
-        'https://andruxnet-random-famous-quotes.p.rapidapi.com/?cat=famous&count=1',
-        {
-          headers: {
-            'X-RapidAPI-Key':
-              'd1d3dedbf5mshe1ec2d4379d51dbp168869jsn8c889a73a933'
-          }
-        }
-      )
-        .then(results => results.json())
-        .then(data =>
-          this.setState({
-            quote: data[0].quote,
-            author: data[0].author
-          })
-        );
-    }, 500);
-
-    document.querySelector('html').style.color = COLORS[randomColor];
-
-    document
-      .getElementById('text')
-      .animate(
-        [{ opacity: 1 }, { opacity: 0 }, { opacity: 0 }, { opacity: 1 }],
-        2000
-      );
-
-    document
-      .getElementById('author')
-      .animate(
-        [{ opacity: 1 }, { opacity: 0.01 }, { opacity: 0.01 }, { opacity: 1 }],
-        2000
-      );
+  handleClick = async () => {
+    await this.changeQuote();
+    this.selectColor();
   };
 
   render() {
+    const { isLoading, randomColor, quote, author } = this.state;
+
     return (
-      <div
-        class='app-container'
-        style={{ backgroundColor: this.state.randomColor }}>
-        <div id='quote-box' className='animated fadeInDown'>
-          <h3 id='text'>
-            <i class='fa fa-quote-left' /> {this.state.quote}
-          </h3>
-          <p id='author'>- {this.state.author}</p>
-          <div id='buttons-container'>
+      <AppContainer color={randomColor} className='animated fadeIn'>
+        <ContentContainer>
+          <QuoteContainer>
+            {isLoading && (
+              <LoaderContainer>
+                <StyledPulseLoader color={randomColor} />
+              </LoaderContainer>
+            )}
+            {!isLoading && (
+              <Fragment>
+                <Quote color={randomColor} className='animated fadeIn'>
+                  <i className='fa fa-quote-left' /> {quote}
+                </Quote>
+                <Author color={randomColor} className='animated fadeIn'>
+                  - {author}
+                </Author>
+              </Fragment>
+            )}
+          </QuoteContainer>
+          <ButtonsContainer>
             <button
               id='new-quote'
-              onClick={this.changeQuote}
-              style={{ backgroundColor: this.state.randomColor }}>
+              onClick={this.handleClick}
+              style={{ backgroundColor: randomColor }}>
               New Quote
             </button>
             <button
               id='tweet-quote-button'
-              style={{ backgroundColor: this.state.randomColor }}>
+              style={{ backgroundColor: randomColor }}>
               <a
                 id='tweet-quote'
-                href={
-                  'https://twitter.com/intent/tweet?text=' +
-                  this.state.quote +
-                  ' - ' +
-                  this.state.author
-                }
-                target='_blank'>
-                <i id='twitter-icon' class='fab fa-twitter' />
+                href={`https://twitter.com/intent/tweet?text=
+                  ${quote}-
+                  ${author}`}
+                target='_blank'
+                rel='noopener noreferrer'>
+                <i id='twitter-icon' className='fab fa-twitter' />
               </a>
             </button>
-          </div>
-        </div>
+          </ButtonsContainer>
+        </ContentContainer>
         <div id='footer'>
           by<a href='https://tsmarques.com'> TSMarques</a>
         </div>
-      </div>
+      </AppContainer>
     );
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const AppContainer = styled.div`
+  height: 100%;
+  background-color: ${props => props.color};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 500ms;
+`;
+
+const ContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 1000px;
+  width: 40%;
+  padding: 1em;
+  border: none;
+  border-radius: 5px;
+  background-color: #ffffff;
+  transition: all 500ms;
+
+  @media only screen and (max-width: 768px) {
+    min-width: 80%;
+    min-height: 20%;
+    margin: 0 1rem;
+  }
+`;
+
+const QuoteContainer = styled.div`
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: stretch;
+`;
+
+const LoaderContainer = styled.div`
+  align-self: center;
+`;
+
+const StyledPulseLoader = styled(PulseLoader)`
+  align-self: center;
+`;
+
+const Quote = styled.h3`
+  color: ${props => props.color};
+  transition: all 500ms;
+`;
+
+const Author = styled.p`
+  color: ${props => props.color};
+`;
+
+const ButtonsContainer = styled.div`
+  display: flex;
+  align-self: stretch;
+  justify-content: space-between;
+  margin-top: auto;
+`;
+
+export default App;
