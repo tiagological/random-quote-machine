@@ -1,8 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import './styles.css';
 import styled from 'styled-components/macro';
 import 'animate.css';
-import { PulseLoader } from 'react-spinners';
+import { Content } from './Content';
+import Footer from './Footer';
 
 class App extends React.Component {
   state = {
@@ -77,49 +78,14 @@ class App extends React.Component {
 
     return (
       <AppContainer color={randomColor} className='animated fadeIn'>
-        <ContentContainer>
-          <QuoteContainer>
-            {isLoading && (
-              <LoaderContainer>
-                <StyledPulseLoader color={randomColor} />
-              </LoaderContainer>
-            )}
-            {!isLoading && (
-              <Fragment>
-                <Quote color={randomColor} className='animated fadeIn'>
-                  <i className='fa fa-quote-left' /> {quote}
-                </Quote>
-                <Author color={randomColor} className='animated fadeIn'>
-                  - {author}
-                </Author>
-              </Fragment>
-            )}
-          </QuoteContainer>
-          <ButtonsContainer>
-            <button
-              id='new-quote'
-              onClick={this.handleClick}
-              style={{ backgroundColor: randomColor }}>
-              New Quote
-            </button>
-            <button
-              id='tweet-quote-button'
-              style={{ backgroundColor: randomColor }}>
-              <a
-                id='tweet-quote'
-                href={`https://twitter.com/intent/tweet?text=
-                  ${quote}-
-                  ${author}`}
-                target='_blank'
-                rel='noopener noreferrer'>
-                <i id='twitter-icon' className='fab fa-twitter' />
-              </a>
-            </button>
-          </ButtonsContainer>
-        </ContentContainer>
-        <div id='footer'>
-          by<a href='https://tsmarques.com'> TSMarques</a>
-        </div>
+        <Content
+          isLoading={isLoading}
+          randomColor={randomColor}
+          quote={quote}
+          author={author}
+          handleClick={this.handleClick}
+        />
+        <Footer />
       </AppContainer>
     );
   }
@@ -133,57 +99,6 @@ const AppContainer = styled.div`
   justify-content: center;
   align-items: center;
   transition: background-color 500ms;
-`;
-
-const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-height: 1000px;
-  width: 40%;
-  padding: 1em;
-  border: none;
-  border-radius: 5px;
-  background-color: #ffffff;
-  transition: all 500ms;
-
-  @media only screen and (max-width: 768px) {
-    min-width: 80%;
-    min-height: 20%;
-    margin: 0 1rem;
-  }
-`;
-
-const QuoteContainer = styled.div`
-  min-height: 100px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-self: stretch;
-`;
-
-const LoaderContainer = styled.div`
-  align-self: center;
-`;
-
-const StyledPulseLoader = styled(PulseLoader)`
-  align-self: center;
-`;
-
-const Quote = styled.h3`
-  color: ${props => props.color};
-  transition: all 500ms;
-`;
-
-const Author = styled.p`
-  color: ${props => props.color};
-`;
-
-const ButtonsContainer = styled.div`
-  display: flex;
-  align-self: stretch;
-  justify-content: space-between;
-  margin-top: auto;
 `;
 
 export default App;
