@@ -13,8 +13,8 @@ class App extends React.Component {
     isLoading: true
   };
 
-  componentDidMount = async () => {
-    await this.changeQuote();
+  componentDidMount = () => {
+    this.changeQuote();
     this.selectColor();
   };
 
@@ -68,8 +68,8 @@ class App extends React.Component {
     });
   };
 
-  handleClick = async () => {
-    await this.changeQuote();
+  handleClick = () => {
+    this.changeQuote();
     this.selectColor();
   };
 
