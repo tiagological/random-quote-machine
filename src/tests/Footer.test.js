@@ -1,5 +1,5 @@
 import React from 'react';
-import Footer from './Footer';
+import Footer from '../Footer';
 import renderer from 'react-test-renderer';
 
 test('Footer renders correctly', () => {
