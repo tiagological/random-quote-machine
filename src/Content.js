@@ -55,6 +55,7 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 50%;
   max-height: 1000px;
   width: 40%;
   padding: 1em;
@@ -65,7 +66,7 @@ const ContentContainer = styled.div`
 
   @media only screen and (max-width: 768px) {
     min-width: 80%;
-    min-height: 20%;
+    min-height: 40%;
     margin: 0 1rem;
   }
 `;
